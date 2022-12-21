@@ -36,7 +36,7 @@ public class UsuarioService {
         return repository.findAll();
     }
 
-    public Optional<Usuario> buscarPorID(Long id){
+    public Optional<Usuario> buscarPorId(Long id){
         return repository.findById(id);
     }
 
