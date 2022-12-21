@@ -12,8 +12,8 @@ import java.util.List;
 @Transactional //rollback para erros no meio de um pacote de transações
 @RequiredArgsConstructor
 public class UsuarioService {
-    // @Autowired não necessaria ja que usamos o lombok la em cima
-    private UsuarioRepository repository;
+    @Autowired
+    private final UsuarioRepository repository;
 
     public Usuario salvar(Usuario usuario){
         // implementar validação de login e email exclusivos
