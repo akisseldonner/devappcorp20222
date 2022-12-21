@@ -2,6 +2,7 @@ package akisselplayer.com.demo.domain.entity.service;
 
 import akisselplayer.com.demo.domain.entity.Usuario;
 import akisselplayer.com.demo.domain.entity.repository.UsuarioRepository;
+import akisselplayer.com.demo.exception.BusinessException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,18 @@ public class UsuarioService {
     private final UsuarioRepository repository;
 
     public Usuario salvar(Usuario usuario){
-        // implementar validação de login e email exclusivos
+        boolean existeEmail = false;
+
+        Optional<Usuario> optUsuario = repository.findByEmail(usuario.getEmail());
+        if(optUsuario.isPresent()){
+            if(!optUsuario.get().getId().equals(usuario.getId())){
+                existeEmail = true;
+            }
+        }
+
+        if(existeEmail){
+            throw new BusinessException("Email já cadastrado");
+        }
         return repository.save(usuario);
     }
 
