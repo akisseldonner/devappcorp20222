@@ -14,6 +14,7 @@ import java.util.Date;
 public class Edicao
 {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private long id;
     private int numero;
     private int ano;
